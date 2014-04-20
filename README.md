@@ -20,10 +20,12 @@ Format your content like the example below. Hovering over the h3 (and hr) will e
 	<div>Stuff ststuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff.</div>
 </div>
 ```
-*__data-hover:__ tracks whether an <hr> element is being hovered by the mouse.
+*__data-hover:__ tracks whether an hr element is being hovered by the mouse.
+
 *__data-expaneded:__ tracks whether a section is expanded.
+
 *__data-squished:__ tracks whether a section title is squished.
 
-##Wanna change something?
+###Wanna change something?
 
 Go ahead! Need help? Maybe I have time, send me an email at Linkedin.com/in/MiguelValencia.
