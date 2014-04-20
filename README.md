@@ -4,7 +4,7 @@ Hoverable Accordion
 Don't like the mouseover effects available for other accordion plugins? Give this a try.
 
 Format your content like the example below. Hovering over the h3 (and hr) will expand the div below it.
-
+```
 <div class="accordion">
 	<hr data-hover=false />
 	<h3 data-expanded=false data-squished=false>Section 1</h3>
@@ -19,10 +19,10 @@ Format your content like the example below. Hovering over the h3 (and hr) will e
 	<h3 data-expanded=false data-squished=false>Section 4</h3>
 	<div>Stuff ststuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff.</div>
 </div>
-
-##data-hover: tracks whether an <hr> element is being hovered by the mouse.
-##data-expaneded: tracks whether a section is expanded.
-##data-squished: tracks whether a section title is squished.
+```
+*__data-hover:__ tracks whether an <hr> element is being hovered by the mouse.
+*__data-expaneded:__ tracks whether a section is expanded.
+*__data-squished:__ tracks whether a section title is squished.
 
 ##Wanna change something?
 
