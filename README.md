@@ -1,7 +1,7 @@
 Hoverable Accordion
 =================
 
-Don't like the mouseover effects available for other accordion plugins? Give this a try.
+Don't like the mouseover effects available for other accordion plugins? Give this a try. [Demo.](http://jsfiddle.net/na_ook/UMShz/)
 
 Format your content like the example below. Hovering over the h3 (and hr) will expand the div below it.
 ```
