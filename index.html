@@ -1,0 +1,185 @@
+<html>
+<head>
+
+<style>
+	#container {
+		width: 100%;
+		background: #F4F6F2;
+	}
+	.accordion {
+		background: #fff;
+		max-height: 230px;
+		overflow: hidden;
+	}
+	.accordion h3 {
+		/*background: #648E64;*/
+		margin:0;
+		padding:5px;
+	}
+	.accordion hr {
+		margin:0;
+		padding-bottom: 5px;
+		border: 1px solid #FFF;
+		border-top: 1px solid #000;
+	}
+	.accordion div {
+		display:none;
+		/*background: #BDBDE8;*/
+	}
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+
+jQuery(document).ready(function() {
+	// events
+		// Make h3 open div
+		$('.accordion h3').mouseenter( openSection );
+
+		// Leaving accordion closes all divs
+		$('.accordion').mouseleave( closeAllSections );
+
+		// Leaving accordion opens all headers
+		$('.accordion').mouseleave( openAllHeaders );
+
+		// Hover over hr, expand it's section
+		$('.accordion hr').mouseenter( openHeader );
+
+		// Hover over hr, wait a sec then open section 
+		$('.accordion hr').mouseenter( timedOpenHeader );
+
+		// Hover over hr, wait a sec then open section 
+		$('.accordion hr').mouseleave( function(){
+			$(this).data('hover', false);
+		});
+
+});
+
+	// functions
+
+	function openSection(hr){
+		
+		// If this is not the window...
+		if (this.self !== window.self) {
+			// ...assume already it's an h3
+			var header = $(this);
+		} else if (hr) {
+			// else take the h3 given by hr
+			var header = hr.next();
+		}
+
+		if ( !header.data('expanded')) {
+
+			// Mark this header as expanded
+			header.data('expanded', true);
+
+			// Find the div below it
+			var section = header.next();
+			
+			// Open it
+			$(section).slideDown();
+
+			// Close all other titles
+			closeOtherSection(header);
+
+			// Squish all other titles
+			squishOtherTitles(header);
+			
+		}
+	}
+
+	function closeOtherSection(that){
+
+		var headers = $('.accordion h3');
+			for (i=0; i<headers.length; i++){
+				// If the header isn't the header that's open
+				if (headers[i] !== that[0]) {
+					// Close it
+					$(headers[i]).next().slideUp();
+					// Signal that it's closed
+					$(headers[i]).data('expanded', false);
+				}
+			}
+	}
+
+	function squishOtherTitles(that){
+		var headers = $('.accordion h3');
+		for (i=0; i<headers.length; i++){
+				// If the header isn't the header that's open
+				if (headers[i] !== that[0]) {
+					// SlideUp the title so only <hr> shows
+					$(headers[i]).slideUp();
+
+					// Signal that it's closed
+					$(headers[i]).data('squished', true);
+
+					// $(headers[i]).data('expanded', false);
+				}
+			}
+	}
+
+	function openHeader(){
+		if ($(this).next().data('squished') === true ) {
+			$(this).next().slideDown();
+			$(this).next().data('squished', false);
+		}
+	}
+
+	function openAllHeaders(){
+		var headers = $('.accordion h3');
+		for (i=0; i<headers.length; i++){
+			// If header is squished
+			if ($(headers[i]).data('squished')) {
+				// Unsquish it
+				$(headers[i]).slideDown();
+				// And mark that it's unsquished
+				$(headers[i]).data('squished', false);
+			}
+		}
+	}
+
+	function closeAllSections(){
+		// Close all sections
+		$('.accordion div').slideUp();
+
+		// Set all h3s' data-expanded to false
+		$('.accordion h3').data('expanded', false);
+	}
+
+	function timedOpenHeader(){
+		// Check if header is open
+		if (!$(this).next().data('expanded')) {
+			$(this).data('hover', true);
+			var hr = $(this);
+
+			setTimeout( function(){
+				if (hr.data('hover')) {
+					openSection(hr);
+				}
+			}, 1000);
+		}
+	}
+
+</script>
+</head>
+<body>
+<!--
+	Each h3 under .accordion has a hover handler that opens the div below it
+-->
+<div id="container">
+	<div class="accordion">
+		<hr data-hover=false />
+		<h3 data-expanded=false data-squished=false>Section 1</h3>
+		<div>Stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff.</div>
+		<hr data-hover=false />
+		<h3 data-expanded=false data-squished=false>Section 2</h3>
+		<div>Stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff.</div>
+		<hr data-hover=false />
+		<h3 data-expanded=false data-squished=false>Section 3</h3>
+		<div>Stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff.</div>
+		<hr data-hover=false />
+		<h3 data-expanded=false data-squished=false>Section 4</h3>
+		<div>Stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff stuff.</div>
+
+	</div>
+</div>
+</body></html>
